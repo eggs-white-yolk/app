@@ -16,7 +16,7 @@ requests.interceptors.request.use(
   },
   (error) => {
     // 对请求错误做些什么
-    return Promise.reject(new error('发送请求出错'));
+    return Promise.reject(error);
   }
 );
 requests.interceptors.response.use(
@@ -25,7 +25,7 @@ requests.interceptors.response.use(
     return res.data;
   },
   (error) => {
-    return Promise.reject(new error('false'));
+    return Promise.reject(error);
   }
 );
 

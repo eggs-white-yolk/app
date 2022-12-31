@@ -67,6 +67,12 @@ export default {
       keyword: '',
     };
   },
+  mounted() {
+    this.$bus.$on('clearContent', this.clearInputContent);
+  },
+  beforeDestroy() {
+    this.$bus.$off('clearContent');
+  },
   methods: {
     toSearch() {
       // this.$router.push('/search');
@@ -77,23 +83,25 @@ export default {
       //     keyword: this.keyword,
       //   },
       // });
-      let result = this.$router.push(
-        {
-          // path: '/search',
-          name: 'search',
-          // query: {
-          //   keyword: this.keyword,
-          // },
-          params: {
-            keyword: this.keyword || undefined,
-          },
+      let location = {
+        // path: '/search',
+        name: 'search',
+        // query: {
+        //   keyword: this.keyword,
+        // },
+        params: {
+          keyword: this.keyword || undefined,
         },
-        // 成功回调
-        () => {},
-        // 失败回调
-        (error) => {}
-      );
-      console.log(result);
+      };
+      if (this.$route.query) {
+        location.query = this.$route.query;
+      }
+      this.$router.push(location);
+    },
+
+    // 清空输入框内容
+    clearInputContent() {
+      this.keyword = undefined;
     },
   },
 };
