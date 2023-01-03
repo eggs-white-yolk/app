@@ -12,6 +12,8 @@ const requests = axios.create({
 requests.interceptors.request.use(
   (config) => {
     nprogress.start();
+    /* 5. 每次请求总是携带用户临时ID(不管是否登陆) */
+    config.headers['userTempId'] = store.state.user.userTempId;
     return config;
   },
   (error) => {

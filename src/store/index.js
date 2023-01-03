@@ -7,6 +7,7 @@ import calcCount from '@/store/calc/index';
 import home from '@/store/home';
 import search from '@/store/search';
 import detail from '@/store/detail';
+import user from '@/store/modules/user';
 
 export default new Vuex.Store({
   modules: {
@@ -14,5 +15,6 @@ export default new Vuex.Store({
     home,
     search,
     detail,
+    user,
   },
 });
